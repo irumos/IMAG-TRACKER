@@ -1,0 +1,69 @@
+
+import os
+import subprocess
+import time
+from scapy.all import rdpcap, IP
+from collections import defaultdict
+import socket
+
+def display_watermark():
+    watermark = """
+  _____                                _______              _             
+ |_   _|                              |__   __|            | |            
+   | |  _ __ ___   __ _  __ _  ___       | |_ __ __ _ _ __ | |_ ___  _ __ 
+   | | | '_ ` _ \ / _` |/ _` |/ _ \      | | '__/ _` |/ __||  // _ \| '__|
+  _| |_| | | | | | (_| | (_| |  __/      | | | | (_| | (__ | (   __/| |   
+ |_____|_| |_| |_|\__,_|\__, |\___|      |_|_|  \__,_|\ __||__\\___||_|   
+                         __/ |                                        
+                        |___/                                          
+
+               >>> Created by: IRUMOS <<<               
+    """
+    print(watermark)
+
+def capture_traffic(interface, duration, output_file="traffic_https.pcap"):
+    print(f"[+] Capturing traffic on interface '{interface}' for {duration} seconds...")
+    command = ["tcpdump", "-i", interface, "-w", output_file]
+    proc = subprocess.Popen(["sudo"] + command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    time.sleep(duration)
+    proc.terminate()
+    print("[+] Capture complete.")
+
+def analyze_https_traffic(pcap_file):
+    print(f"[+] Analyzing traffic from {pcap_file}...")
+    try:
+        packets = rdpcap(pcap_file)
+    except Exception as e:
+        print(f"[!] Failed to read pcap file: {e}")
+        return
+
+    destinations = defaultdict(int)
+
+    for pkt in packets:
+        if IP in pkt:
+            ip_dst = pkt[IP].dst
+            pkt_len = len(pkt)
+            destinations[ip_dst] += pkt_len
+
+    sorted_dests = sorted(destinations.items(), key=lambda x: x[1], reverse=True)
+
+    print("\n[*] Top connections by data sent during image upload:")
+    for ip, total_bytes in sorted_dests[:10]:
+        try:
+            domain = socket.gethostbyaddr(ip)[0]
+        except:
+            domain = "Unknown"
+        print(f" - {ip} ({domain}) : {total_bytes} bytes")
+
+def main():
+    display_watermark()
+    print("--- HTTPS Image Upload Tracker ---")
+    interface = input("Enter network interface to monitor (e.g., wlan0): ").strip()
+    duration = int(input("Enter duration of capture in seconds: ").strip())
+    pcap_file = "https_upload_traffic.pcap"
+
+    capture_traffic(interface, duration, pcap_file)
+    analyze_https_traffic(pcap_file)
+
+if __name__ == "__main__":
+    main()
