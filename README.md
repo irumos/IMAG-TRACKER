@@ -1,10 +1,10 @@
-# IMAG-UPLOAD-TRACKER
+# IMAG-TRACKER
 To find the destination of the image which is uploaded in a website
-# 🛡️ Image Upload Tracker
+#   Image Tracker
 
 A simple Python tool to monitor image uploads from your device and identify where the image is sent on the network using Kali Linux tools like `tcpdump` and `scapy`.
 
-## 📌 Features
+##  Features
 
 - Captures network traffic during a file upload
 
@@ -14,7 +14,7 @@ A simple Python tool to monitor image uploads from your device and identify wher
 
 - Optionally resolves IP addresses to domain names
 
-## 🚀 How to Use
+##  How to Use
 
 1. **Install Dependencies**:
 
