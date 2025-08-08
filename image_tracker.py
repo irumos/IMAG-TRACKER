@@ -59,8 +59,8 @@ def analyze_https_traffic(pcap_file):
 
 def main():
     display_watermark()
-    print("--- HTTPS Image Upload Tracker ---")
-    interface = input("Enter network interface to monitor (e.g., wlan0): ").strip()
+    print("--- HTTPS Image Tracker ---")
+    interface = input("Enter network interface to monitor (e.g., wlan0, eth0): ").strip()
     duration = int(input("Enter duration of capture in seconds: ").strip())
     pcap_file = "https_upload_traffic.pcap"
 
