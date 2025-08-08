@@ -6,20 +6,22 @@ from scapy.all import rdpcap, IP
 from collections import defaultdict
 import socket
 
-def display_watermark():
-    watermark = """
-  _____                                _______              _             
- |_   _|                              |__   __|            | |            
-   | |  _ __ ___   __ _  __ _  ___       | |_ __ __ _ _ __ | |_ ___  _ __ 
-   | | | '_ ` _ \ / _` |/ _` |/ _ \      | | '__/ _` |/ __||  // _ \| '__|
-  _| |_| | | | | | (_| | (_| |  __/      | | | | (_| | (__ | (   __/| |   
- |_____|_| |_| |_|\__,_|\__, |\___|      |_|_|  \__,_|\ __||__\\___||_|   
-                         __/ |                                        
-                        |___/                                          
+from colorama import init, Fore, Style
 
-               >>> Created by: IRUMOS <<<               
-    """
-    print(watermark)
+def display_watermark():
+    init(autoreset=True)  # Initialize colorama (resets color after each print automatically)
+
+    print(Fore.GREEN + Style.BRIGHT + r"""
+.___   _____      _____    ___________________  _____________________    _____  _________  ____  __._____________________ 
+|   | /     \    /  _  \  /  _____/\_   _____/  \__    ___/\______   \  /  _  \ \_   ___ \|    |/ _|\_   _____/\______   \
+|   |/  \ /  \  /  /_\  \/   \  ___ |    __)_     |    |    |       _/ /  /_\  \/    \  \/|      <   |    __)_  |       _/
+|   /    Y    \/    |    \    \_\  \|        \    |    |    |    |   \/    |    \     \___|    |  \  |        \ |    |   \
+|___\____|__  /\____|__  /\______  /_______  /    |____|    |____|_  /\____|__  /\______  /____|__ \/_______  / |____|_  /
+            \/         \/        \/        \/                     \/         \/        \/        \/        \/         \/  
+
+                   >>> IMAGE TRACKER - Created by: IRUMOS <<<
+    """ + Style.RESET_ALL)
+
 
 def capture_traffic(interface, duration, output_file="traffic_https.pcap"):
     print(f"[+] Capturing traffic on interface '{interface}' for {duration} seconds...")
