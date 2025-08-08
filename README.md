@@ -1,4 +1,4 @@
-# IMAG-TRACKER
+# IMAGE-TRACKER
 To find the destination of the image which is uploaded in a website
 #   Image Tracker
 
