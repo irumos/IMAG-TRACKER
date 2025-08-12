@@ -19,7 +19,7 @@ def display_watermark():
 |___\____|__  /\____|__  /\______  /_______  /    |____|    |____|_  /\____|__  /\______  /____|__ \/_______  / |____|_  /
             \/         \/        \/        \/                     \/         \/        \/        \/        \/         \/  
 
-                   >>> IMAGE TRACKER - Created by: IRUMOS <<<
+                   >>> IMAGE TRACKER - Created by: IRUMOS ("Komal") <<<
     """ + Style.RESET_ALL)
 
 
