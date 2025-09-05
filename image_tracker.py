@@ -62,7 +62,7 @@ def main():
     print("--- HTTPS Image Tracker ---")
     interface = input("Enter network interface to monitor (e.g., wlan0, eth0): ").strip()
     duration = int(input("Enter duration of capture in seconds: ").strip())
-    pcap_file = "https_upload_traffic.pcap"
+    pcap_file = "traffic_https.pcap"
 
     capture_traffic(interface, duration, pcap_file)
     analyze_https_traffic(pcap_file)
